@@ -130,7 +130,7 @@ def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
         ImageDraw.Draw(img).text((i*w, 0), f'{title}', (255, 255, 255)) # coordinates, text, color, font
     return img 
 
-def reconstruction_pipeline(image, size=320): 
+def reconstruction_pipeline(image, size=320, name): 
     x_dalle = preprocess(image, target_image_size=size, map_dalle=True)
     x_vqgan = preprocess(image, target_image_size=size, map_dalle=False)
     print("x_dalle, x_vqgan") 
@@ -148,7 +148,7 @@ def reconstruction_pipeline(image, size=320):
                                 custom_to_pil(x2[0]), titles=titles)
     
     tmp_dir = './tmp_save/'
-    save_path = os.path.join(tmp_dir, "reconstructions.jpg") 
+    save_path = os.path.join(tmp_dir, f"reconstructions_{name}.jpg") 
     img.save(save_path) 
     print("done save the image") 
     print(f"Saved reconstruction to: {save_path}") 
