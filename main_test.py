@@ -130,7 +130,7 @@ def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
         ImageDraw.Draw(img).text((i*w, 0), f'{title}', (255, 255, 255)) # coordinates, text, color, font
     return img 
 
-def reconstruction_pipeline(image, size=320, name): 
+def reconstruction_pipeline(image, size=320, name=None): 
     x_dalle = preprocess(image, target_image_size=size, map_dalle=True)
     x_vqgan = preprocess(image, target_image_size=size, map_dalle=False)
     print("x_dalle, x_vqgan") 
@@ -193,6 +193,6 @@ if __name__=='__main__':
     print(internet_image.size)
     name = img_path.split('/')[-1].split('.')[0]
     
-    reconstruction_pipeline(img, size=384, name) 
+    reconstruction_pipeline(img, size=384, name=name) 
     print("------> done")  
     #conda environments:
