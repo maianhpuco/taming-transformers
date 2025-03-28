@@ -151,10 +151,10 @@ if __name__=='__main__':
     DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
     
     config1024 = load_config("logs/vqgan_imagenet_f16_1024/configs/model.yaml", display=False)
-    # config16384 = load_config("logs/vqgan_imagenet_f16_16384/configs/model.yaml", display=False)
+    config16384 = load_config("logs/vqgan_imagenet_f16_16384/configs/model.yaml", display=False)
 
     model1024 = load_vqgan(config1024, ckpt_path="logs/vqgan_imagenet_f16_1024/checkpoints/last.ckpt").to(DEVICE)
-    # model16384 = load_vqgan(config16384, ckpt_path="logs/vqgan_imagenet_f16_16384/checkpoints/last.ckpt").to(DEVICE)
+    model16384 = load_vqgan(config16384, ckpt_path="logs/vqgan_imagenet_f16_16384/checkpoints/last.ckpt").to(DEVICE)
     config32x32 = load_config("logs/vqgan_gumbel_f8/configs/model.yaml", display=False)
     model32x32 = load_vqgan(config32x32, ckpt_path="logs/vqgan_gumbel_f8/checkpoints/last.ckpt", is_gumbel=True).to(DEVICE)   
     
