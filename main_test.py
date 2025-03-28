@@ -164,11 +164,16 @@ if __name__=='__main__':
     
     titles = ["input", "DALL-E", "VQGAN 32x32", "VQGAN 1024", "VQGAN 16384"] 
     
-    #-------- 
+    #--------
+    import cv2  
     img_path = "/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_373_01/mask/08_373_01_242_4096_14336_mask.jpg"
-    img = Image.open(img_path) 
-    img_array = np.array(img) 
-    #url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
-    # image=download_image(url) 
-    reconstruction_pipeline(img_array, size=384) 
+    img = cv2.imread(img_path) 
+    print('-----------------------------------------------------------------------------------------------')
+    print(img.size)
+    # img = Image.open(img_path) 
+    
+    url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
+    image=download_image(url) 
+    print(image.size) 
+    # reconstruction_pipeline(img, size=384) 
  
