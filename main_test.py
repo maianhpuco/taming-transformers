@@ -181,18 +181,24 @@ if __name__=='__main__':
     #--------
     import cv2  
     # img_path = "/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_373_01/mask/08_373_01_242_4096_14336_mask.jpg"
-    img_path = '/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_368_01/img/08_368_01_54_8192_2048_img.jpg'
+    
     # img = cv2.imread(img_path) 
-    img = Image.open(img_path) 
+    
     print('-----------------------------------------------------------------------------------------------')
-    print(img.size)
     # img = Image.open(img_path) 
     
     url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
     internet_image=download_image(url) 
     print(internet_image.size)
-    name = img_path.split('/')[-1].split('.')[0]
     
-    reconstruction_pipeline(img, size=384, name=name) 
+    from glob import glob
+    image_paths = glob('/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_368_01/img/*.jpg')[:5]
+        # img_path = '/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_368_01/img/08_368_01_54_8192_2048_img.jpg'
+    for img_path in image_paths:  
+        name = img_path.split('/')[-1].split('.')[0] 
+        print("processing: ", name)
+        img = Image.open(img_path)  
+        reconstruction_pipeline(img, size=384, name=name) 
+        
     print("------> done")  
     #conda environments:
