@@ -166,8 +166,7 @@ if __name__=='__main__':
     sys.path.append(".")
     import torch
     torch.set_grad_enabled(False)
-    load_dalle_models()  
-    
+    load_dalle_models() 
      
     config1024 = load_config("logs/vqgan_imagenet_f16_1024/configs/model.yaml", display=False)
     config16384 = load_config("logs/vqgan_imagenet_f16_16384/configs/model.yaml", display=False)
@@ -192,7 +191,8 @@ if __name__=='__main__':
     url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
     internet_image=download_image(url) 
     print(internet_image.size)
-     
-    reconstruction_pipeline(img, size=384)
+    name = img_path.split('/')[-1].split('.')[0]
+    
+    reconstruction_pipeline(img, size=384, name) 
     print("------> done")  
     #conda environments:
