@@ -414,6 +414,8 @@ Thanks to everyone who makes their code and models available. In particular,
 ---model1024 codebook shape: torch.Size([1024, 256])
 -----------------------------------------------------------------------------------------------
 <pre>```
+---model1024 codebook shape: torch.Size([1024, 256]) 
+
 processing:  08_368_01_327_5120_14336_img
 x_dalle, x_vqgan
 torch.Size([1, 3, 384, 384]) torch.Size([1, 3, 384, 384])
