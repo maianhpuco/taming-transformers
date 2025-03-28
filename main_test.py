@@ -117,6 +117,8 @@ def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
 def reconstruction_pipeline(image, size=320): 
     x_dalle = preprocess(image, target_image_size=size, map_dalle=True)
     x_vqgan = preprocess(image, target_image_size=size, map_dalle=False)
+    print("x_dalle, x_vqgan") 
+    print(x_dalle.shape, x_vqgan.shape) 
     x_dalle = x_dalle.to(DEVICE)
     x_vqgan = x_vqgan.to(DEVICE)
     
@@ -165,7 +167,8 @@ if __name__=='__main__':
     #-------- 
     img_path = "/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_373_01/mask/08_373_01_242_4096_14336_mask.jpg"
     img = Image.open(img_path) 
+    img_array = np.array(img) 
     #url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
     # image=download_image(url) 
-    reconstruction_pipeline(img, size=384) 
+    reconstruction_pipeline(img_array, size=384) 
  
