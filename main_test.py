@@ -17,7 +17,21 @@ import torch.nn.functional as F
 import torchvision.transforms as T
 import torchvision.transforms.functional as TF
 
-from dall_e          import map_pixels, unmap_pixels, load_model
+from dall_e import map_pixels, unmap_pixels
+from torch.serialization import add_safe_globals
+from dall_e.encoder import Encoder
+from dall_e.decoder import Decoder  # just in case decoder is also needed
+
+add_safe_globals([Encoder, Decoder])  # allow custom classes
+
+def load_model(path, device):
+    if path.startswith('http'):
+        with urlopen(path) as f:
+            buf = io.BytesIO(f.read())
+    else:
+        with open(path, 'rb') as f:
+            buf = io.BytesIO(f.read())
+    return torch.load(buf, map_location=device)  # weights_only=True by default is now okay 
 # from IPython.display import display, display_markdown
 # ---------- image reconstruction code : DECODER ONLY ------------  
 
@@ -139,6 +153,7 @@ def reconstruction_pipeline(image, size=320):
     
 def load_dalle_models():
     global encoder_dalle, decoder_dalle
+    
     encoder_dalle = load_model("https://cdn.openai.com/dall-e/encoder.pkl", DEVICE)
     decoder_dalle = load_model("https://cdn.openai.com/dall-e/decoder.pkl", DEVICE)
  
