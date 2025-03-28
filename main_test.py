@@ -33,7 +33,7 @@ def load_model(path, device):
     else:
         with open(path, 'rb') as f:
             buf = io.BytesIO(f.read())
-    return torch.load(buf, map_location=device)  # weights_only=True by default is now okay 
+    return torch.load(buf, map_location=device, weights_only=False)  # weights_only=True by default is now okay 
 # from IPython.display import display, display_markdown
 # ---------- image reconstruction code : DECODER ONLY ------------  
 
@@ -167,8 +167,6 @@ if __name__=='__main__':
     import torch
     torch.set_grad_enabled(False)
     load_dalle_models()  
-    
-    DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
     
      
     config1024 = load_config("logs/vqgan_imagenet_f16_1024/configs/model.yaml", display=False)
