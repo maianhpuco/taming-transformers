@@ -16,6 +16,7 @@ import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
 import torchvision.transforms.functional as TF
+import urlopen 
 
 from dall_e import map_pixels, unmap_pixels
 from torch.serialization import add_safe_globals
