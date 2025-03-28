@@ -408,3 +408,22 @@ Thanks to everyone who makes their code and models available. In particular,
       primaryClass={cs.CV}
 }
 ```
+
+
+-------
+---model1024 codebook shape: torch.Size([1024, 256])
+-----------------------------------------------------------------------------------------------
+(1000, 750)
+processing:  08_368_01_327_5120_14336_img
+x_dalle, x_vqgan
+torch.Size([1, 3, 384, 384]) torch.Size([1, 3, 384, 384])
+input is of size: torch.Size([1, 3, 384, 384])
+VQGAN --- GumbelVQ: latent shape: torch.Size([48, 48])
+indices shape:  torch.Size([1, 48, 48]) indices unique:  torch.Size([1239])
+VQGAN --- VQModel: latent shape: torch.Size([24, 24])
+indices shape:  torch.Size([576]) indices unique:  torch.Size([321])
+VQGAN --- VQModel: latent shape: torch.Size([24, 24])
+indices shape:  torch.Size([576]) indices unique:  torch.Size([201])
+DALL-E: latent shape: torch.Size([1, 48, 48])
+done save the image
+Saved reconstruction to: ./tmp_save/reconstructions_08_368_01_327_5120_14336_img.jpg 
