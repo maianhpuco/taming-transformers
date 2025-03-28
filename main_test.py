@@ -114,9 +114,9 @@ def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
         ImageDraw.Draw(img).text((i*w, 0), f'{title}', (255, 255, 255)) # coordinates, text, color, font
     return img 
 
-def reconstruction_pipeline(url, size=320):
-    x_dalle = preprocess(download_image(url), target_image_size=size, map_dalle=True)
-    x_vqgan = preprocess(download_image(url), target_image_size=size, map_dalle=False)
+def reconstruction_pipeline(image, size=320): 
+    x_dalle = preprocess(image, target_image_size=size, map_dalle=True)
+    x_vqgan = preprocess(image, target_image_size=size, map_dalle=False)
     x_dalle = x_dalle.to(DEVICE)
     x_vqgan = x_vqgan.to(DEVICE)
     
@@ -134,6 +134,7 @@ def reconstruction_pipeline(url, size=320):
     img.save(save_path) 
     print("done save the image") 
     print(f"Saved reconstruction to: {save_path}") 
+    
 def load_dalle_models():
     global encoder_dalle, decoder_dalle
     encoder_dalle = load_model("https://cdn.openai.com/dall-e/encoder.pkl", DEVICE)
@@ -150,6 +151,7 @@ if __name__=='__main__':
     
     DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
     
+     
     config1024 = load_config("logs/vqgan_imagenet_f16_1024/configs/model.yaml", display=False)
     config16384 = load_config("logs/vqgan_imagenet_f16_16384/configs/model.yaml", display=False)
 
@@ -159,5 +161,11 @@ if __name__=='__main__':
     model32x32 = load_vqgan(config32x32, ckpt_path="logs/vqgan_gumbel_f8/checkpoints/last.ckpt", is_gumbel=True).to(DEVICE)   
     
     titles = ["input", "DALL-E", "VQGAN 32x32", "VQGAN 1024", "VQGAN 16384"] 
-    reconstruction_pipeline(url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg', size=384) 
+    
+    #-------- 
+    img_path = "/project/hnguyen2/mvu9/datasets/kidney_pathology_image/train/Task1_patch_level/train/NEP25/08_373_01/mask/08_373_01_242_4096_14336_mask.jpg"
+    img = Image.open(img_path) 
+    #url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
+    # image=download_image(url) 
+    reconstruction_pipeline(img, size=384) 
  
