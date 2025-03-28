@@ -2,6 +2,24 @@ import yaml
 import torch
 from omegaconf import OmegaConf
 from taming.models.vqgan import VQModel, GumbelVQ
+# ---------- image reconstruction code : DECODER ONLY ------------ 
+
+import io
+import os, sys
+import requests
+import PIL
+from PIL import Image
+from PIL import ImageDraw, ImageFont
+import numpy as np
+
+import torch
+import torch.nn.functional as F
+import torchvision.transforms as T
+import torchvision.transforms.functional as TF
+
+from dall_e          import map_pixels, unmap_pixels, load_model
+# from IPython.display import display, display_markdown
+# ---------- image reconstruction code : DECODER ONLY ------------  
 
 def load_config(config_path, display=False):
     config = OmegaConf.load(config_path)
@@ -41,23 +59,6 @@ def reconstruct_with_vqgan(x, model):
     xrec = model.decode(z)
     return xrec
 
-# ---------- image reconstruction code : DECODER ONLY ------------ 
-
-import io
-import os, sys
-import requests
-import PIL
-from PIL import Image
-from PIL import ImageDraw, ImageFont
-import numpy as np
-
-import torch
-import torch.nn.functional as F
-import torchvision.transforms as T
-import torchvision.transforms.functional as TF
-
-from dall_e          import map_pixels, unmap_pixels, load_model
-from IPython.display import display, display_markdown
 
 font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf", 22)
 
