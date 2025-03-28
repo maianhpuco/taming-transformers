@@ -116,7 +116,6 @@ def reconstruct_with_dalle(x, encoder, decoder, do_preprocess=False):
 
     return x_rec
 
-
 def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
     assert input.size == x1.size == x2.size == x3.size
     w, h = input.size[0], input.size[1]
@@ -126,9 +125,33 @@ def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
     img.paste(x1, (2*w,0))
     img.paste(x2, (3*w,0))
     img.paste(x3, (4*w,0))
+    
+    # Load a larger font (adjust path and size as needed)
+    try:
+        font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-BoldItalic.ttf", 28)
+    except:
+        font = ImageFont.load_default()
+    
+    # Add titles in black
+    draw = ImageDraw.Draw(img)
     for i, title in enumerate(titles):
-        ImageDraw.Draw(img).text((i*w, 0), f'{title}', (255, 255, 255)) # coordinates, text, color, font
-    return img 
+        draw.text((i*w + 10, 10), f'{title}', fill=(0, 0, 0), font=font)
+
+    return img
+ 
+
+# def stack_reconstructions(input, x0, x1, x2, x3, titles=[]):
+#     assert input.size == x1.size == x2.size == x3.size
+#     w, h = input.size[0], input.size[1]
+#     img = Image.new("RGB", (5*w, h))
+#     img.paste(input, (0,0))
+#     img.paste(x0, (1*w,0))
+#     img.paste(x1, (2*w,0))
+#     img.paste(x2, (3*w,0))
+#     img.paste(x3, (4*w,0))
+#     for i, title in enumerate(titles):
+#         ImageDraw.Draw(img).text((i*w, 0), f'{title}', (255, 255, 255)) # coordinates, text, color, font
+#     return img 
 
 def reconstruction_pipeline(image, size=320, name=None): 
     x_dalle = preprocess(image, target_image_size=size, map_dalle=True)
