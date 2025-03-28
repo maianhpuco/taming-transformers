@@ -190,7 +190,9 @@ if __name__=='__main__':
     # img = Image.open(img_path) 
     
     url='https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/1000x-1.jpg' 
-    image=download_image(url) 
-    print(image.size) 
-    #reconstruction_pipeline(img, size=384) 
+    internet_image=download_image(url) 
+    print(internet_image.size)
+     
+    reconstruction_pipeline(img, size=384)
+    print("------> done")  
     #conda environments:
